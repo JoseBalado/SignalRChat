@@ -11,6 +11,8 @@ namespace Notification
         private Timer _timer;
         private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(1000);
 
+        private Queue<double> LastHundredValues = new Queue<double>(10);
+
         public NotificationService(IHubContext<ChatHub> myHubContext)
         {
             _myHubContext = myHubContext;
@@ -37,9 +39,30 @@ namespace Notification
             var cpuUsageTotal = cpuTotalUsedMilliseconds / (Environment.ProcessorCount * millisecondsToWait);
             var cpuUsagePercentage = cpuUsageTotal * 100; Console.WriteLine(cpuUsagePercentage);
 
+            UpdateQueue(cpuUsagePercentage);
+
             _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", $"{cpuUsagePercentage:N2}");
 
+
             Console.WriteLine("CPU usage: " + $"{cpuUsagePercentage:N2}");
+        }
+
+        private void UpdateQueue(double cpuUsagePercentage)
+        {
+            if(LastHundredValues.Count < 10)
+            {
+                LastHundredValues.Enqueue(cpuUsagePercentage);
+            }
+            else
+            {
+                LastHundredValues.Dequeue();
+                LastHundredValues.Enqueue(cpuUsagePercentage);
+            }
+
+            foreach(double number in LastHundredValues)
+            {
+                Console.WriteLine("Queue:" + number);
+            }
         }
     }
 }
