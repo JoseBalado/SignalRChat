@@ -11,7 +11,7 @@ var w = [0,cw/5,2*(cw/5),3*(cw/5),4*(cw/5),5*(cw/5)];
 var h = [ch,ch-ch/5,ch-2*(ch/5),ch-3*(ch/5),ch-4*(ch/5),ch-5*(ch/5)];
 
 var seconds = ['second1','second2','second3','second4', 'second5','second6','second7','second8','second9','second10'];
-var percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+var percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 var val = [];
 
 
@@ -29,18 +29,28 @@ for(var i = percentage.length-1;i>=0;i--){
 	document.getElementById('percentage').appendChild(value);
 }
 
-var ch = document.getElementById("chart");
+function drawPercentage(message)
+{
+    var ch = document.getElementById("chart");
 
-chart.beginPath();
-      
-//actual graph      
-for(var i =0;i<w.length;i++){
+    chart.clearRect(0, 0, chart.canvas.width, chart.canvas.height);
 
-	chart.moveTo(0, ch);
-	chart.strokeStyle = '#1dd2af';
-	chart.lineWidth = 2;
-	chart.lineTo(w[i], h[Math.floor((Math.random() * 4) + 1)]);
-	chart.stroke();
+    chart.beginPath();
+
+    //actual graph
+    for(var i =0;i<w.length;i++){
+        console.log("draw percentage");
+        console.log("Hi: ", message);
+        chart.moveTo(0, ch);
+        chart.strokeStyle = '#1dd2af';
+        chart.lineWidth = 2;
+        chart.lineTo(w[i], h[Math.floor((Math.random() * 4) + 1)]);
+        chart.stroke();
+    }
+
+    gridV();
+    gridH();
+
 }
 
 // vertical lines
@@ -72,7 +82,7 @@ gridV();
 gridH();
 
 
-var beforex = document.querySelector('#weeks>span:before');
+var beforex = document.querySelector('#seconds>span:before');
 
 for(var i = 1;i<w.length;i++){
 	beforex.style.marginLeft = w[i];

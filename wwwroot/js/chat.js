@@ -21,13 +21,16 @@ connection.on("ReceiveMessage", function (user, message) {
 });
 
 connection.on("SendQueue", function (user, message) {
+    window.percentages = message;
     var messageList = document.getElementById("messagesList");
     messageList.innerHTML = "";
-    message.forEach(number => {
+    window.percentages.forEach(number => {
         var li = document.createElement("li");
         messageList.appendChild(li);
         li.textContent = `${user} says ${number}`;
     });
+
+    drawPercentage(message);
 
 });
 
