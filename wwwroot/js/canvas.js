@@ -12,14 +12,14 @@ for(var i = 1 ; i <= 10; i++){
 
 for(var i = 10; i >= 1; i--){
 	var value = document.createElement('span');
-	var text_percentage = document.createTextNode(`${i}`)
+	var text_percentage = document.createTextNode(`${i * 10}`)
 	value.appendChild(text_percentage);
 	document.getElementById('percentage').appendChild(value);
 }
 
 function drawPercentage(message)
 {
-    var totalNUmberOfHorizontalDivisions = 11;
+    var totalNUmberOfHorizontalDivisions = 101;
     chart.clearRect(0, 0, chart.canvas.width, chart.canvas.height);
 
     chart.beginPath();
@@ -65,6 +65,5 @@ function gridH(){
      chart.stroke();
 }
 
-  
 gridV();
 gridH();
