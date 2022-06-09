@@ -8,6 +8,8 @@ namespace Notification
     public class NotificationService
     {
         private readonly IHubContext<ChatHub> _myHubContext;
+        private Timer _timer;
+        private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(1000);
 
         public NotificationService(IHubContext<ChatHub> myHubContext)
         {
@@ -20,9 +22,15 @@ namespace Notification
             await _myHubContext.Clients.All.SendAsync("SendMessage", user, message);
         }
 
-        public void ShowUsage()
+        public async Task startBroadcastCPUUsage()
         {
-            Console.WriteLine("Hello World");
+            Console.WriteLine("Hello Broadcast");
+            _timer = new Timer(UpdateCPUUsage, null, _updateInterval, _updateInterval);
+        }
+
+        private async void UpdateCPUUsage(Object state)
+        {
+            Console.WriteLine("Update CPU usage");
         }
     }
 }
