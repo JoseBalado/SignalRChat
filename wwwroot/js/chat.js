@@ -5,6 +5,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
 
+/*
 connection.on("ReceiveMessage", function (user, message) {
     var li = document.createElement("li");
     document.getElementById("messagesList").appendChild(li);
@@ -13,9 +14,19 @@ connection.on("ReceiveMessage", function (user, message) {
     // should be aware of possible script injection concerns.
     li.textContent = `${user} says ${message}`;
 });
+*/
 
 connection.on("ReceiveMessage", function (user, message) {
     document.getElementById("percentageUsage").innerHTML = "CPU Percentage Usage: " + message;
+});
+
+connection.on("SendQueue", function (user, message) {
+    message.forEach(number => {
+        var li = document.createElement("li");
+        document.getElementById("messagesList").appendChild(li);
+        li.textContent = `${user} says ${number}`;
+    });
+
 });
 
 connection.start().then(function () {
