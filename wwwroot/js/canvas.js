@@ -3,30 +3,16 @@ var chart = document.getElementById("chart").getContext("2d");
 var canvasWidth = chart.canvas.width;
 var canvasHight = chart.canvas.height;
 
-canvasWidth = 800;
-canvasHight = 400;
-
-var cw = chart.canvas.width;
-var ch = chart.canvas.height;
-
-var w = [0,  1 * (cw / 10), 2 *(cw / 10), 3 * (cw / 10), 4 * (cw / 10), 5 * (cw / 10),
-         6 * (cw / 10), 7 * (cw / 10), 8 * (cw / 10), 9 * (cw / 10), 10 * (cw / 10)];
-
-var h = [ch,ch - 1 * (ch/5),ch-2*(ch/5),ch-3*(ch/5),ch-4*(ch/5),ch-5*(ch/5),ch-6*(ch/5),ch-7*(ch/5),ch-8*(ch/5),ch-9*(ch/5)];
-
-var percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-
-
-for(var i = 1 ; i <= seconds.length; i++){
+for(var i = 1 ; i <= 10; i++){
 	var second = document.createElement('span');
 	var text = document.createTextNode(`${i * 10}s`)
 	second.appendChild(text);
 	document.getElementById('seconds').appendChild(second);
 }
 
-for(var i = percentage.length - 1; i >= 0; i--){
+for(var i = 10; i >= 1; i--){
 	var value = document.createElement('span');
-	var text_percentage = document.createTextNode(percentage[i])
+	var text_percentage = document.createTextNode(`${i}`)
 	value.appendChild(text_percentage);
 	document.getElementById('percentage').appendChild(value);
 }
