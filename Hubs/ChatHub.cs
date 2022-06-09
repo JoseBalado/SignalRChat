@@ -20,7 +20,7 @@ namespace SignalRChat.Hubs
         {
             await base.OnConnectedAsync();
             await Clients.Caller.SendAsync("ReceiveMessage", "server", "successfully connected");
-            await _stockTicker.startBroadcastCPUUsage();
+            _stockTicker.startBroadcastCPUUsage();
         }
     }
 }

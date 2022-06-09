@@ -13,7 +13,6 @@ namespace Notification
 
         public NotificationService(IHubContext<ChatHub> myHubContext)
         {
-            Console.WriteLine("Hello DI");
             _myHubContext = myHubContext;
         }
 
@@ -22,13 +21,12 @@ namespace Notification
             await _myHubContext.Clients.All.SendAsync("SendMessage", user, message);
         }
 
-        public async Task startBroadcastCPUUsage()
+        public void startBroadcastCPUUsage()
         {
-            Console.WriteLine("Hello Broadcast");
             _timer = new Timer(UpdateCPUUsage, null, _updateInterval, _updateInterval);
         }
 
-        private async void UpdateCPUUsage(Object state)
+        private void UpdateCPUUsage(Object state)
         {
             var millisecondsToWait = 500;
             var startCpuUsage = Process.GetProcesses();
@@ -43,7 +41,7 @@ namespace Notification
             var cpuUsageTotal = cpuTotalUsedMilliseconds / (Environment.ProcessorCount * millisecondsToWait);
             var cpuUsagePercentage = cpuUsageTotal * 100; Console.WriteLine(cpuUsagePercentage);
 
-            await _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", cpuUsagePercentage);
+            _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", cpuUsagePercentage);
 
             Console.WriteLine("CPU usage: " + cpuUsagePercentage);
         }
