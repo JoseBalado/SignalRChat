@@ -41,7 +41,7 @@ namespace Notification
 
             var cpuTotalUsedMilliseconds = endTotal - startTotal;
             var cpuUsageTotal = cpuTotalUsedMilliseconds / (Environment.ProcessorCount * millisecondsToWait);
-            var cpuUsagePercentage = cpuUsageTotal * 100;
+            var cpuUsagePercentage = Math.Abs(cpuUsageTotal * 100);
 
             UpdateQueue(cpuUsagePercentage);
 
