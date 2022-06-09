@@ -15,12 +15,5 @@ namespace SignalRChat.Hubs
             Console.WriteLine("User: {0}, message {1}", user, message);
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-
-        public override async Task OnConnectedAsync()
-        {
-            await base.OnConnectedAsync();
-            await Clients.Caller.SendAsync("ReceiveMessage", "server", "successfully connected");
-            _stockTicker.startBroadcastCPUUsage();
-        }
     }
 }

@@ -14,16 +14,12 @@ namespace Notification
         public NotificationService(IHubContext<ChatHub> myHubContext)
         {
             _myHubContext = myHubContext;
+            _timer = new Timer(UpdateCPUUsage, null, _updateInterval, _updateInterval);
         }
 
         public async Task SendMessage(string user, string message)
         {
             await _myHubContext.Clients.All.SendAsync("SendMessage", user, message);
-        }
-
-        public void startBroadcastCPUUsage()
-        {
-            _timer = new Timer(UpdateCPUUsage, null, _updateInterval, _updateInterval);
         }
 
         private void UpdateCPUUsage(Object state)
