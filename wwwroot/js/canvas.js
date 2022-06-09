@@ -14,13 +14,12 @@ var w = [0,  1 * (cw / 10), 2 *(cw / 10), 3 * (cw / 10), 4 * (cw / 10), 5 * (cw 
 
 var h = [ch,ch - 1 * (ch/5),ch-2*(ch/5),ch-3*(ch/5),ch-4*(ch/5),ch-5*(ch/5),ch-6*(ch/5),ch-7*(ch/5),ch-8*(ch/5),ch-9*(ch/5)];
 
-var seconds = ['10s','20s','30s','40s', '50s','60s','70s','80s','90s','100s'];
 var percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 
-for(var i = 0 ; i < seconds.length; i++){
+for(var i = 1 ; i <= seconds.length; i++){
 	var second = document.createElement('span');
-	var text = document.createTextNode(seconds[i])
+	var text = document.createTextNode(`${i * 10}s`)
 	second.appendChild(text);
 	document.getElementById('seconds').appendChild(second);
 }

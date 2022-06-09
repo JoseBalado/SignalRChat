@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
 using SignalRChat.Hubs;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
 namespace Notification
