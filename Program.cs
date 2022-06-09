@@ -26,7 +26,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapHub<ChatHub>("/chatHub");
 
-// Thread thread1 = new Thread(CPUusage.ShowUsage);
-// thread1.Start();
-
 app.Run();

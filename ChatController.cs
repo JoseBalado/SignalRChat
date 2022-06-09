@@ -41,9 +41,9 @@ namespace Notification
             var cpuUsageTotal = cpuTotalUsedMilliseconds / (Environment.ProcessorCount * millisecondsToWait);
             var cpuUsagePercentage = cpuUsageTotal * 100; Console.WriteLine(cpuUsagePercentage);
 
-            _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", cpuUsagePercentage);
+            _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", $"{cpuUsagePercentage:N2}");
 
-            Console.WriteLine("CPU usage: " + cpuUsagePercentage);
+            Console.WriteLine("CPU usage: " + $"{cpuUsagePercentage:N2}");
         }
     }
 }

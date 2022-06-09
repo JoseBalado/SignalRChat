@@ -14,6 +14,10 @@ connection.on("ReceiveMessage", function (user, message) {
     li.textContent = `${user} says ${message}`;
 });
 
+connection.on("ReceiveMessage", function (user, message) {
+    document.getElementById("percentageUsage").innerHTML = "CPU Percentage Usage: " + message;
+});
+
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
