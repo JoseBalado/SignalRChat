@@ -21,9 +21,11 @@ connection.on("ReceiveMessage", function (user, message) {
 });
 
 connection.on("SendQueue", function (user, message) {
+    var messageList = document.getElementById("messagesList");
+    messageList.innerHTML = "";
     message.forEach(number => {
         var li = document.createElement("li");
-        document.getElementById("messagesList").appendChild(li);
+        messageList.appendChild(li);
         li.textContent = `${user} says ${number}`;
     });
 
