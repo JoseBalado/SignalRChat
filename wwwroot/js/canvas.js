@@ -34,6 +34,7 @@ for(var i = percentage.length - 1; i>=0; i--){
 
 function drawPercentage(message)
 {
+    var totalNUmberOfHorizontalDivisions = 11;
     chart.clearRect(0, 0, chart.canvas.width, chart.canvas.height);
 
     chart.beginPath();
@@ -43,9 +44,10 @@ function drawPercentage(message)
         console.log("Hi: ", message);
         chart.strokeStyle = '#1dd2af';
         chart.lineWidth = 2;
-        chart.lineTo(i * canvasWidth / (message.length - 1), canvasHight - (canvasHight * Math.abs(parseFloat(message[i])) / 100));
-        chart.stroke();
+        chart.lineTo(i * canvasWidth / (totalNUmberOfHorizontalDivisions - 1), canvasHight - (canvasHight * Math.abs(parseFloat(message[i])) / 100));
     }
+
+    chart.stroke();
 
     gridV();
     gridH();
