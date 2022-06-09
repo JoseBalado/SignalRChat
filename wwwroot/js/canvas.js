@@ -10,23 +10,23 @@ var w = [0,cw/5,2*(cw/5),3*(cw/5),4*(cw/5),5*(cw/5)];
 
 var h = [ch,ch-ch/5,ch-2*(ch/5),ch-3*(ch/5),ch-4*(ch/5),ch-5*(ch/5)];
 
-var weeks = ['week1','week2','week3','week4'];
-var values = [100,200,300,400,500];
+var seconds = ['second1','second2','second3','second4', 'second5','second6','second7','second8','second9','second10'];
+var percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 var val = [];
 
 
-for(var i = 0;i<weeks.length;i++){
-	var week = document.createElement('span');
-	var text = document.createTextNode(weeks[i])
-	week.appendChild(text);
-	document.getElementById('weeks').appendChild(week);
+for(var i = 0;i<seconds.length;i++){
+	var second = document.createElement('span');
+	var text = document.createTextNode(seconds[i])
+	second.appendChild(text);
+	document.getElementById('seconds').appendChild(second);
 }
 
-for(var i = values.length-1;i>=0;i--){
+for(var i = percentage.length-1;i>=0;i--){
 	var value = document.createElement('span');
-	var text_value = document.createTextNode(values[i])
-	value.appendChild(text_value);
-	document.getElementById('values').appendChild(value);
+	var text_percentage = document.createTextNode(percentage[i])
+	value.appendChild(text_percentage);
+	document.getElementById('percentage').appendChild(value);
 }
 
 var ch = document.getElementById("chart");
