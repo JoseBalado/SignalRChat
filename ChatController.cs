@@ -11,7 +11,7 @@ namespace Notification
         private Timer _timer;
         private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(1000);
 
-        private Queue<string> LastHundredValues = new Queue<string>(10);
+        private Queue<string> LastHundredValues = new Queue<string>(11);
 
         public NotificationService(IHubContext<ChatHub> myHubContext)
         {
@@ -53,7 +53,7 @@ namespace Notification
 
         private void UpdateQueue(double cpuUsagePercentage)
         {
-            if(LastHundredValues.Count < 10)
+            if(LastHundredValues.Count < 11)
             {
                 LastHundredValues.Enqueue($"{cpuUsagePercentage:N2}");
             }

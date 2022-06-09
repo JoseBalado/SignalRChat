@@ -43,9 +43,10 @@ function drawPercentage(message)
         console.log("Hi: ", message);
         chart.strokeStyle = '#1dd2af';
         chart.lineWidth = 2;
-        chart.lineTo(i * canvasWidth / message.length, Math.abs(parseFloat(message[i]) - 100));
-        chart.stroke();
+		// chart.moveTo(i * canvasWidth / message.length, Math.abs(parseFloat(message[i]) - 100));
+        chart.lineTo(i * canvasWidth / message.length, canvasHight - (canvasHight * Math.abs(parseFloat(message[i])) / 100));
     }
+        chart.stroke();
 
     gridV();
     gridH();
