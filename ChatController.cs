@@ -11,7 +11,7 @@ namespace Notification
         private Timer _timer;
         private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(1000);
 
-        private Queue<double> LastHundredValues = new Queue<double>(10);
+        private Queue<string> LastHundredValues = new Queue<string>(10);
 
         public NotificationService(IHubContext<ChatHub> myHubContext)
         {
@@ -28,22 +28,25 @@ namespace Notification
         {
             var millisecondsToWait = 500;
             var startCpuUsage = Process.GetProcesses();
-            var startTotal = startCpuUsage .ToList() .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
+            var startTotal = startCpuUsage
+                .ToList()
+                .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
 
             Thread.Sleep(millisecondsToWait);
 
             var endCpuUsage = Process.GetProcesses();
-            var endTotal = endCpuUsage .ToList() .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
+            var endTotal = endCpuUsage
+                .ToList()
+                .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
 
             var cpuTotalUsedMilliseconds = endTotal - startTotal;
             var cpuUsageTotal = cpuTotalUsedMilliseconds / (Environment.ProcessorCount * millisecondsToWait);
-            var cpuUsagePercentage = cpuUsageTotal * 100; Console.WriteLine(cpuUsagePercentage);
+            var cpuUsagePercentage = cpuUsageTotal * 100;
 
             UpdateQueue(cpuUsagePercentage);
 
             _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", $"{cpuUsagePercentage:N2}");
             _myHubContext.Clients.All.SendAsync("SendQueue", "server", LastHundredValues);
-
 
             Console.WriteLine("CPU usage: " + $"{cpuUsagePercentage:N2}");
         }
@@ -52,15 +55,15 @@ namespace Notification
         {
             if(LastHundredValues.Count < 10)
             {
-                LastHundredValues.Enqueue(cpuUsagePercentage);
+                LastHundredValues.Enqueue($"{cpuUsagePercentage:N2}");
             }
             else
             {
                 LastHundredValues.Dequeue();
-                LastHundredValues.Enqueue(cpuUsagePercentage);
+                LastHundredValues.Enqueue($"{cpuUsagePercentage:N2}");
             }
 
-            foreach(double number in LastHundredValues)
+            foreach(string number in LastHundredValues)
             {
                 Console.WriteLine("Queue:" + number);
             }
