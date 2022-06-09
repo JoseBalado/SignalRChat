@@ -1,7 +1,7 @@
 var chart = document.getElementById("chart").getContext("2d");
 
-chart.canvas.width = "300";
-chart.canvas.height = "150";
+chart.canvas.width = "500";
+chart.canvas.height = "200";
 
 var cw = chart.canvas.width;
 var ch = chart.canvas.height;
@@ -10,7 +10,7 @@ var w = [0,cw/5,2*(cw/5),3*(cw/5),4*(cw/5),5*(cw/5)];
 
 var h = [ch,ch-ch/5,ch-2*(ch/5),ch-3*(ch/5),ch-4*(ch/5),ch-5*(ch/5)];
 
-var seconds = ['second1','second2','second3','second4', 'second5','second6','second7','second8','second9','second10'];
+var seconds = ['1s','2s','3s','4s', '5s','6s','7s','8s','9s','10s'];
 var percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 var val = [];
 
@@ -38,13 +38,11 @@ function drawPercentage(message)
     chart.beginPath();
 
     //actual graph
-    for(var i =0;i<w.length;i++){
-        console.log("draw percentage");
+    for(var i = 0; i < w.length; i++){
         console.log("Hi: ", message);
-        chart.moveTo(0, ch);
         chart.strokeStyle = '#1dd2af';
         chart.lineWidth = 2;
-        chart.lineTo(w[i], h[Math.floor((Math.random() * 4) + 1)]);
+        chart.lineTo(w[i], Math.abs(parseFloat(message[i]) - 100));
         chart.stroke();
     }
 
