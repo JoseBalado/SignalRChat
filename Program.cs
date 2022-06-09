@@ -1,9 +1,12 @@
 using SignalRChat.Hubs;
+using Notification;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
+
+builder.Services.AddSingleton<NotificationService>();
 
 var app = builder.Build();
 
@@ -22,5 +25,8 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapHub<ChatHub>("/chatHub");
+
+// Thread thread1 = new Thread(CPUusage.ShowUsage);
+// thread1.Start();
 
 app.Run();
