@@ -68,13 +68,14 @@ function gridV(){
 //horizontal lines
 function gridH(){
 	
-	for(var i =1; i<h.length-1; i++){
+	for(var i = 0; i <= 10; i++){
 		chart.strokeStyle = 'rgba(29, 210, 175,0.3)';
 		chart.lineWidth = 1;
-		chart.moveTo(0,h[i]);
-		chart.lineTo(canvasWidth, h[i]);
-	  }
-	      chart.stroke();
+		chart.moveTo(0, i * canvasHight / 10);
+		chart.lineTo(canvasWidth, i * canvasHight / 10);
+    }
+
+     chart.stroke();
 }
 
   
