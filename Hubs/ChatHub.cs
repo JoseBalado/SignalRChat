@@ -19,7 +19,7 @@ namespace SignalRChat.Hubs
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();
-            await Clients.Caller.SendAsync("ReceiveMessage", "Successfully connected");
+            await Clients.Caller.SendAsync("ReceiveMessage", "server", "successfully connected");
         }
     }
 }
