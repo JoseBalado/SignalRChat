@@ -3,8 +3,8 @@ var chart = document.getElementById("chart").getContext("2d");
 var canvasWidth = chart.canvas.width;
 var canvasHight = chart.canvas.height;
 
-canvasWidth = 400;
-canvasHight = 200;
+canvasWidth = 800;
+canvasHight = 400;
 
 var cw = chart.canvas.width;
 var ch = chart.canvas.height;
@@ -18,14 +18,14 @@ var seconds = ['10s','20s','30s','40s', '50s','60s','70s','80s','90s','100s'];
 var percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 
-for(var i = 0 ;i<seconds.length; i++){
+for(var i = 0 ; i < seconds.length; i++){
 	var second = document.createElement('span');
 	var text = document.createTextNode(seconds[i])
 	second.appendChild(text);
 	document.getElementById('seconds').appendChild(second);
 }
 
-for(var i = percentage.length - 1; i>=0; i--){
+for(var i = percentage.length - 1; i >= 0; i--){
 	var value = document.createElement('span');
 	var text_percentage = document.createTextNode(percentage[i])
 	value.appendChild(text_percentage);
@@ -83,10 +83,3 @@ function gridH(){
   
 gridV();
 gridH();
-
-
-var beforex = document.querySelector('#seconds>span:before');
-
-for(var i = 1;i<w.length;i++){
-	beforex.style.marginLeft = w[i];
-}
