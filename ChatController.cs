@@ -24,29 +24,37 @@ namespace Notification
 
         private void UpdateCPUUsage(Object state)
         {
-            var millisecondsToWait = 500;
-            var startCpuUsage = Process.GetProcesses();
-            var startTotal = startCpuUsage
-                .ToList()
-                .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
+            try
+            {
+                var millisecondsToWait = 500;
+                var startCpuUsage = Process.GetProcesses();
+                var startTotal = startCpuUsage
+                    .ToList()
+                    .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
 
-            Thread.Sleep(millisecondsToWait);
+                Thread.Sleep(millisecondsToWait);
 
-            var endCpuUsage = Process.GetProcesses();
-            var endTotal = endCpuUsage
-                .ToList()
-                .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
+                var endCpuUsage = Process.GetProcesses();
+                var endTotal = endCpuUsage
+                    .ToList()
+                    .Sum(process => process.TotalProcessorTime.TotalMilliseconds);
 
-            var cpuTotalUsedMilliseconds = endTotal - startTotal;
-            var cpuUsageTotal = cpuTotalUsedMilliseconds / (Environment.ProcessorCount * millisecondsToWait);
-            var cpuUsagePercentage = Math.Abs(cpuUsageTotal * 100);
+                var cpuTotalUsedMilliseconds = endTotal - startTotal;
+                var cpuUsageTotal = cpuTotalUsedMilliseconds / (Environment.ProcessorCount * millisecondsToWait);
+                var cpuUsagePercentage = Math.Abs(cpuUsageTotal * 100);
 
-            UpdateQueue(cpuUsagePercentage);
+                UpdateQueue(cpuUsagePercentage);
 
-            _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", $"{cpuUsagePercentage:N2}");
-            _myHubContext.Clients.All.SendAsync("SendQueue", "server", LastHundredValues);
+                _myHubContext.Clients.All.SendAsync("ReceiveMessage", "server", $"{cpuUsagePercentage:N2}");
+                _myHubContext.Clients.All.SendAsync("SendQueue", "server", LastHundredValues);
 
-            Console.WriteLine("CPU usage: " + $"{cpuUsagePercentage:N2}");
+                Console.WriteLine("CPU usage: " + $"{cpuUsagePercentage:N2}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} Second exception caught.", e);
+                Console.WriteLine("Just keep running, no problem!!!.");
+            }
         }
 
         private void UpdateQueue(double cpuUsagePercentage)
@@ -59,11 +67,6 @@ namespace Notification
             {
                 LastHundredValues.Dequeue();
                 LastHundredValues.Enqueue($"{cpuUsagePercentage:N2}");
-            }
-
-            foreach(string number in LastHundredValues)
-            {
-                Console.WriteLine("Queue:" + number);
             }
         }
     }
