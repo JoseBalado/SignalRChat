@@ -1,4 +1,20 @@
+## SignalR Web Application
+### Requirements: Install .NET SDK 6.0.300
+(https://dotnet.microsoft.com/en-us/download/dotnet/6.0https://www.example.com)
 
+### Tested with:
+    Linux Mint 20 and .NET 6.0.300
+
+
+### To run the application 'cd' into the folder of the project, execute the command 'dotnet run' and follow the instructions.
+
+    $ cd SignalRChat/
+    $ dotnet run
+
+
+### To see the application running go to the following URL in your browser:
+
+    https://localhost:7116/
 
 ## Some errors when connecting to the application:
 
