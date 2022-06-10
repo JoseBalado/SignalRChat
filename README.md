@@ -3,8 +3,9 @@
 (https://dotnet.microsoft.com/en-us/download/dotnet/6.0https://www.example.com)
 
 ### Tested with:
-    Linux Mint 20 and .NET 6.0.300
-    Google Chrome, version 102.0.5005.115 (Official Build) (64-bit) (Linux)
+    * Linux Mint 20
+    * .NET SDK 6.0.300
+    * Google Chrome, version 102.0.5005.115 (Official Build) (64-bit) (Linux)
 
 
 ### Cloning the repository
