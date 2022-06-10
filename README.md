@@ -4,6 +4,7 @@
 
 ### Tested with:
     Linux Mint 20 and .NET 6.0.300
+    Google Chrome, version 102.0.5005.115 (Official Build) (64-bit) (Linux)
 
 
 ### To run the application 'cd' into the folder of the project, execute the command 'dotnet run' and follow the instructions.
