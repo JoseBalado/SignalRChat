@@ -26,6 +26,9 @@
 
     https://localhost:7116/
 
+### To connect from another device on the same network use the IP of the server in the URL:
+
+    https://ip-of-the-server:7116/
 ## Some errors when connecting to the application:
 
 ### "Your Connection Is Not Private", "NET::ERR_CERT_AUTHORITY_INVALID" or similar.
