@@ -47,6 +47,21 @@ builder.Services.AddCors(options =>
 //      policy.AllowAnyMethod();
 //  });
 
+// To allow connections from other IPs in the same network and not just from the same server as 'localhost':
+// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints?view=aspnetcore-6.0
+// https://stackoverflow.com/questions/71044525/how-to-access-asp-net-core-web-server-from-another-device
+//
+//   "Kestrel": {
+//     "Endpoints": {
+//       "Http": {
+//         "Url": "http://0.0.0.0:5001"
+//       },
+//       "Https": {
+//         "Url": "https://0.0.0.0:7116"
+//       }
+//     }
+//   }
+
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 
