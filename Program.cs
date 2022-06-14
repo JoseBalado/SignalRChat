@@ -16,7 +16,8 @@ builder.Services.AddCors(options =>
                             // WithOrigins() needed when AllowCredentials() is needed.
                             policy.WithOrigins(
                                 "http://localhost:3000",    // IP of the server that wants to connect to this server.
-                                "http://127.0.0.1:8080"     // Must much exactly with the URL. If it is localhost then "localhost".
+                                "http://192.168.1.33:3000"  // IP of the server that wants to connect to this server.
+                                                            // Must much exactly with the URL. If it is localhost then "localhost".
                                                             // If it is an IP number, an IP number must be used here.
                             );
                         });
