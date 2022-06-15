@@ -15,32 +15,30 @@ builder.Services.AddCors(options =>
                             policy.AllowCredentials();
                             // WithOrigins() needed when AllowCredentials() is needed.
                             policy.WithOrigins(
-                                "http://localhost:3000",    // IP of the server that wants to connect to this server.
-                                "http://192.168.1.33:3000"  // IP of the server that wants to connect to this server.
-                                                            // Must much exactly with the URL. If it is localhost then "localhost".
-                                                            // If it is an IP number, an IP number must be used here.
+                                "http://192.168.1.33:3000", // IP of the server and port that wants to connect to this server.
+                                                            // The application on the server (JavaScript) trying to connect must use this protocol, IP and port: 
+                                                            // https://ip-of-this-server:7116/chatHub
+
+                                "http://localhost:3000"     // Allow connecting from localhost.
+
                             );
                         });
 });
 
 // -- WebSockets -- how to connect from the client:
-// Start the server, that must have as ip the ulr as shown in policy.WithOrigins().
 // Configure JavaScript in the client as:
 // <script src="signalr.js"></script>
-// const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7116/chatHub").build();
+// const connection = new signalR.HubConnectionBuilder().withUrl("https://ip-of-the-server:7116/chatHub").build();
 
-
-// -- RestFul -- to work with "Create React App" configuring the proxy section in package.json with the IP or
-// localhost, depending on what we put on JavaScript to connect is enough:
-//  "proxy": "https://localhost:7116"
-// and client JavaScript can connect just using the URL, no need for server and port to be configured.
-// be just "weatherforecast" (I need to test that) in case that is a get route provided by the server.
+// -- RestFul -- to work with "Create React App" configuring the proxy section in package.json with the IP.
+//  "proxy": "https://ip-of-the-server:7116"
 //
-// fetch('https://localhost:7201/weatherforecast')
+// Connecting using vanilla JavaScript:
+// fetch('https://ip-of-the-server:7116/weatherforecast')
 //   .then(response => response.json())
 //   .then(data => console.log(data));
 //
-// Also, RestFul doesn't need AllowCredentials(), so this configuration for policy would be enough:
+// RestFul doesn't need AllowCredentials(), so this configuration for policy would be enough:
 //  policy  =>
 //  {
 //      policy.AllowAnyHeader();
@@ -55,7 +53,7 @@ builder.Services.AddCors(options =>
 //   "Kestrel": {
 //     "Endpoints": {
 //       "Http": {
-//         "Url": "http://0.0.0.0:5001"
+//         "Url": "http://0.0.0.0:5231"
 //       },
 //       "Https": {
 //         "Url": "https://0.0.0.0:7116"

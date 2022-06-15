@@ -39,3 +39,11 @@
 
         dotnet dev-certs https --clean
         dotnet dev-certs https --trust
+
+### Updating certificates Ubuntu. After updating certificates accept unsecure  connection the browser needs to reload it., so first connect to the the https connection and
+### accept the certificate the server sends, so go to "https://192.168.1.33/7116" before going to "http://192.168.1.33:3000".
+    sudo apt-get install -y ca-certificates
+    dotnet dev-certs https --clean
+    dotnet dev-certs https --trust
+    sudo -E dotnet dev-certs https -ep /usr/local/share/ca-certificates/https.crt --format PEM
+    sudo update-ca-certificates
